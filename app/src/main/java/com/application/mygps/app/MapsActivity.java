@@ -51,8 +51,15 @@ public class MapsActivity extends FragmentActivity implements GoogleApiClient.Co
         mGoogleApiClient = new GoogleApiClient.Builder(this)
                 .addConnectionCallbacks(this)
                 .addOnConnectionFailedListener(this)
-                .addApi(LocationServices.API)
+                .addApiIfAvailable(LocationServices.API)
                 .build();
+    }
+
+    @Override
+    public void onStart() {
+        Log.v("google", "started");
+        super.onStart();
+        mGoogleApiClient.connect();
     }
 
     @Override
@@ -114,7 +121,7 @@ public class MapsActivity extends FragmentActivity implements GoogleApiClient.Co
 
     @Override
     public void onConnectionFailed(ConnectionResult result) {
-        Log.v("google", "failed" + result);
+        Log.v("google", result.getErrorMessage());
         if (mResolvingError) {
             // Already attempting to resolve an error.
             return;
