@@ -1,7 +1,27 @@
-<fragment xmlns:android="http://schemas.android.com/apk/res/android"
-          xmlns:tools="http://schemas.android.com/tools"
-          android:layout_width="match_parent"
-          android:layout_height="match_parent"
-          android:id="@+id/map"
-          tools:context=".MapsActivity"
-          android:name="com.google.android.gms.maps.MapFragment"/>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="fill_parent"
+              android:layout_height="fill_parent"
+              android:orientation="vertical"
+              tools:context=".MapsActivity">
+    <LinearLayout android:layout_width="fill_parent" android:layout_height="400dp">
+        <fragment xmlns:android="http://schemas.android.com/apk/res/android"
+                  xmlns:tools="http://schemas.android.com/tools"
+                  android:layout_width="match_parent"
+                  android:layout_height="match_parent"
+                  android:id="@+id/map"
+                  tools:context=".MapsActivity"
+                  android:name="com.google.android.gms.maps.MapFragment"/>
+    </LinearLayout>
+    <LinearLayout android:layout_width="fill_parent" android:layout_height="100dp"
+                  android:layout_gravity="center_horizontal"
+                  android:orientation="vertical">
+
+        <TextView android:layout_width="fill_parent" android:layout_height="wrap_content"
+                  android:text="Set Proximity Radius"/>
+        <EditText android:id="@+id/radius_text" android:inputType="number" android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"/>
+        <Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Accept"
+                android:id="@+id/radius_button" android:onClick="setRadius"/>
+    </LinearLayout>
+</LinearLayout>
