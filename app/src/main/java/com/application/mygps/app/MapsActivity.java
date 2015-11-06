@@ -9,7 +9,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
-import android.widget.Toast;
+import android.widget.EditText;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationServices;
@@ -20,7 +20,7 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 
 public class MapsActivity extends FragmentActivity implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, OnMapReadyCallback {
     private static final String googlePlacesURL = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?";
-    private static final long PROXIMITY_RADIUS = 5000;
+    private long PROXIMITY_RADIUS = 5000;
     private static final String GOOGLE_API_KEY = "AIzaSyBG5b8TSHFWn_Oe-P0WUTI_2A97j2JGHfY";
     private GoogleMap mMap; // Might be null if Google Play services APK is not available.
     private Location mLastLocation;
@@ -85,7 +85,9 @@ public class MapsActivity extends FragmentActivity implements GoogleApiClient.Co
                 mGoogleApiClient);
         Log.v("latitude", String.valueOf(mLastLocation.getLatitude()));
         Log.v("longitude", String.valueOf(mLastLocation.getLongitude()));
+    }
 
+    public void retrieveLocations() {
         StringBuilder googlePlacesUrl = new StringBuilder(googlePlacesURL);
         googlePlacesUrl.append("location=" + mLastLocation.getLatitude() + "," + mLastLocation.getLongitude());
         googlePlacesUrl.append("&radius=" + PROXIMITY_RADIUS);
@@ -98,7 +100,6 @@ public class MapsActivity extends FragmentActivity implements GoogleApiClient.Co
         toPass[0] = mMap;
         toPass[1] = googlePlacesUrl.toString();
         googlePlacesReadTask.execute(toPass);
-
     }
 
     @Override
@@ -157,6 +158,8 @@ public class MapsActivity extends FragmentActivity implements GoogleApiClient.Co
     }
 
     public void setRadius(View view) {
-        Toast.makeText(getApplicationContext(), "Hello", Toast.LENGTH_LONG).show();
+        EditText radiusText = (EditText) findViewById(R.id.radius_text);
+        PROXIMITY_RADIUS = Long.valueOf(radiusText.getText().toString());
+        retrieveLocations();
     }
 }
