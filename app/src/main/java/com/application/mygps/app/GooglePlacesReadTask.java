@@ -32,6 +32,5 @@ public class GooglePlacesReadTask extends AsyncTask<Object, Integer, String> {
         toPass[0] = googleMap;
         toPass[1] = result;
         placesDisplayTask.execute(toPass);
-        Log.d("Google Place Read Task Results", result);
     }
 }

@@ -20,7 +20,7 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 
 public class MapsActivity extends FragmentActivity implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, OnMapReadyCallback {
     private static final String googlePlacesURL = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?";
-    private long PROXIMITY_RADIUS = 5000;
+    private long PROXIMITY_RADIUS = 500;
     private static final String GOOGLE_API_KEY = "AIzaSyBG5b8TSHFWn_Oe-P0WUTI_2A97j2JGHfY";
     private GoogleMap mMap; // Might be null if Google Play services APK is not available.
     private Location mLastLocation;
@@ -55,6 +55,8 @@ public class MapsActivity extends FragmentActivity implements GoogleApiClient.Co
         mapFragment.getMapAsync(this);
         mMap = mapFragment.getMap();
         mMap.setMyLocationEnabled(true);
+        EditText radiusText = (EditText) findViewById(R.id.radius_text);
+        radiusText.setText(String.valueOf(PROXIMITY_RADIUS));
     }
 
     protected synchronized void buildGoogleApiClient() {
