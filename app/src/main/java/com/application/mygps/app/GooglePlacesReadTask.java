@@ -20,6 +20,7 @@ public class GooglePlacesReadTask extends AsyncTask<Object, Integer, String> {
             Http http = new Http();
             googlePlacesData = http.read(googlePlacesUrl);
         } catch (Exception e) {
+            Log.d("Google Place Read Task Failed", e.toString());
         }
         return googlePlacesData;
     }
